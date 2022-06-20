@@ -1,0 +1,20 @@
+{
+    "pelicula": [
+        {"id":1,"title":"Aliens", "enCartelera": true},
+        {"id":2,"title":"Hombres de Negro","enCartelera": true},
+        {"id":3,"title":"Titatic", "enCartelera": false}
+    ],
+    "sala": [
+        {"nro":1,"capacidad": 40},
+        {"nro":2,"capacidad": 40},
+        {"nro":3,"capacidad": 40}
+    ],
+    "Reservas":
+	[
+        {		
+            "id": 1,
+            "cantiAcientosPide": 2,
+            "SalaId": 1
+        }
+	]	
+}
