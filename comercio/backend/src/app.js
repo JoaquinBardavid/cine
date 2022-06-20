@@ -13,26 +13,25 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
   })
 
-app.get('/', function (req, res) {
+
+//////////////////////////////////////
+///////////// Peliculas //////////////
+//////////////////////////////////////
+
+
+app.get('/pelicula', function (req, res) {
     res.json(cine.pelicula);
     });
 
-app.get('/movie', function (req, res) {
-    let aux = null;
-    cine.pelicula.forEach(movie => {
-        if(movie.id == req.query.id){
-            aux = movie;
-        }
-    })
-    if(aux != null)
-        {res.json(aux); }
-    else
-        {res.send("no se encontró la pelicula")}
-    });
+app.get('/pelicula/:id', function (req, res) {
+    let id = req.params.id;
+    let peliculas = cine.pelicula.filter(p => p.id == id);
+    res.json(peliculas);
+});
 
-app.post('/', (req, res) => {
-    const { title, director} = req.body;
-    if (title && director) {
+app.post('/pelicula', (req, res) => {
+    const { title, enCartelera } = req.body;
+    if (title && enCartelera) {
         let id = cine.pelicula[cine.pelicula.length - 1].id + 1;
         let newMovie = { id , ...req.body };
         cine.pelicula.push(newMovie);
@@ -40,15 +39,15 @@ app.post('/', (req, res) => {
         res.json(cine);
     }
     else {
-        res.send("hubo un error agregando la pelicula");
+        res.send('<div>hubo un error agregando la pelicula</div>');
     }
 });
 
-app.put('/editMovie', (req, res) => {
+app.put('/pelicula', (req, res) => {
     const { id } = req.query;
-    const { title, director} = req.body;
-    if (title && director) {
-        cine.forEach(movie => {
+    const { title, enCartelera} = req.body;
+    if (title && enCartelera) {
+        cine.pelicula.forEach(movie => {
             if (movie.id == id) {
                 movie.title = title;
             }
@@ -57,18 +56,82 @@ app.put('/editMovie', (req, res) => {
         res.json(cine);
     }
     else {
-        res.send("hubo un error editando la pelicula");
+        res.send('<div>hubo un error editando la pelicula</div>');
     }
 });
 
-app.delete('/', (req, res) => {
-    let aux = cine;
+app.put('/eliminar', (req, res) => {
     const { id } = req.query;
-    aux.forEach(movie => {
-        if (movie.id == id) {
-            cine.splice(cine.indexOf(movie), 1);
+    const { title, enCartelera} = req.body;
+    if (title && enCartelera) {
+        cine.pelicula.forEach(movie => {
+            if (movie.id == id) {
+                movie.enCartelera = false;
+            }
+        });
+        fs.writeFileSync("./movies.json", JSON.stringify(cine));
+        res.json(cine);
+    }
+    else {
+        res.send('<div>hubo un error elimnando la pelicula</div>');
+    }
+});
+
+//////////////////////////////////////
+///////////// Reservas ///////////////
+//////////////////////////////////////
+
+
+
+app.get('/reserva', function (req, res) {
+    res.json(cine.reserva);
+    });
+
+app.get('/reserva/:id', function (req, res) {
+    let id = req.params.id;
+    let reserva = cine.reserva.filter(r => r.id == id);
+    res.json(reserva);
+});
+
+app.post('/reserva', (req, res) => {
+    const { cantAsientos, SalaId } = req.body;
+    if (cantAsientos && SalaId) {
+        let id = cine.reserva[cine.reservas.length - 1].id + 1;
+        let nuevaRes = { id , ...req.body };
+        cine.reserva.push(nuevaRes);
+        fs.writeFileSync("./movies.json", JSON.stringify(cine));
+        res.json(cine);
+    }
+    else {
+        res.send('<div>hubo un error agregando la pelicula</div>');
+    }
+});
+
+app.put('/reserva', (req, res) => {
+    const { id } = req.query;
+    const { cantiAsientos, salaId} = req.body;
+    if (cantiAsientos && salaId) {
+        cine.reserva.forEach(r => {
+            if (r.id == id) {
+                r.cantAsientos = cantiAsientos;
+                r.salaId = salaId;
+            }
+        });
+        fs.writeFileSync("./movies.json", JSON.stringify(cine));
+        res.json(cine);
+    }
+    else {
+        res.send('<div>hubo un error editando la pelicula</div>');
+    }
+});
+
+app.delete('/reserva', (req, res) => {
+    const { id } = req.query;
+    cine.reserva.forEach(r => {
+        if (r.id == id) {
+            cine.reserva.splice(cine.reserva.indexOf(r), 1);
         }
     });
     fs.writeFileSync("./movies.json", JSON.stringify(cine));
-    res.send(cine);
-})
+    res.json(cine);
+});

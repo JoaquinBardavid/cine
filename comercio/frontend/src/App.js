@@ -18,7 +18,7 @@ export default function App (){
     
     return(
         <div>
-            {APIData? <div>{console.log(APIData)}</div> : <span>Espere</span>}
+            {APIData? <div>{APIData.id}</div> : <span>Espere</span>}
         </div>
     )
 }

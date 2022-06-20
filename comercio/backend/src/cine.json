@@ -9,12 +9,12 @@
         {"nro":2,"capacidad": 40},
         {"nro":3,"capacidad": 40}
     ],
-    "Reservas":
+    "reserva":
 	[
         {		
             "id": 1,
-            "cantiAcientosPide": 2,
-            "SalaId": 1
+            "cantAsientos": 2,
+            "salaId": 1
         }
 	]	
 }
