@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from "./paginas/Layout";
 import Home from "./paginas/Home";
 import Peliculas from "./paginas/Peliculas";
-import Reservas from "./paginas/Reservas";
+import Reservas from "./paginas/reservas/Reservas";
 
 export default function App (){
 
