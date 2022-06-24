@@ -1,8 +1,8 @@
 {
     "pelicula": [
-        {"id":1,"titulo":"Aliens", "enCartelera": true},
-        {"id":2,"titulo":"Hombres de Negro","enCartelera": true},
-        {"id":3,"titulo":"Titatic", "enCartelera": false}
+        {"id":1,"titulo":"Aliens", "enCartelera": true,"sala": 1, "img": ""},
+        {"id":2,"titulo":"Hombres de Negro","enCartelera": true,"sala": 2, "img": ""},
+        {"id":3,"titulo":"Titatic", "enCartelera": false,"sala": 3, "img": ""}
     ],
     "sala": [
         {"id":1,"capacidad": 40},

@@ -11,7 +11,7 @@ app.use(cors())
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-  })
+})
 
 
 //////////////////////////////////////
@@ -21,7 +21,7 @@ app.listen(port, () => {
 
 app.get('/pelicula', function (req, res) {
     res.json(cine.pelicula);
-    });
+});
 
 app.get('/pelicula/:id', function (req, res) {
     let id = req.params.id;
@@ -33,7 +33,7 @@ app.post('/pelicula', (req, res) => {
     const { titulo, enCartelera } = req.body;
     if (titulo && enCartelera) {
         let id = cine.pelicula[cine.pelicula.length - 1].id + 1;
-        let newMovie = { id , ...req.body };
+        let newMovie = { id, ...req.body };
         cine.pelicula.push(newMovie);
         fs.writeFileSync("./cine.json", JSON.stringify(cine));
         res.json(cine.pelicula);
@@ -45,7 +45,7 @@ app.post('/pelicula', (req, res) => {
 
 app.put('/pelicula', (req, res) => {
     const { id } = req.query;
-    const { title, enCartelera} = req.body;
+    const { title, enCartelera } = req.body;
     if (title && enCartelera) {
         cine.pelicula.forEach(movie => {
             if (movie.id == id) {
@@ -60,23 +60,16 @@ app.put('/pelicula', (req, res) => {
     }
 });
 
-app.put('/eliminar/:id', (req, res) => {
-    const { id } = req.params.id;
-    const { title, enCartelera} = req.body;
-    if (title && enCartelera) {
-        cine.pelicula.forEach(movie => {
-            if (movie.id == id) {
-                movie.enCartelera = false;
-            }
-        });
-        fs.writeFileSync("./cine.json", JSON.stringify(cine));
-        res.json(cine.pelicula);
-    }
-    else {
-        res.send('<div>hubo un error elimnando la pelicula</div>');
-    }
+app.put('/cambioCartelera/:id', (req, res) => {
+    const { id } = req.query;
+    cine.pelicula.forEach(movie => {
+        if (movie.id == id) {
+            movie.enCartelera = !movie.enCartelera
+        }
+    });
+    fs.writeFileSync("./movies.json", JSON.stringify(cine));
+    res.json(cine);
 });
-
 
 //////////////////////////////////////
 ///////////// Reservas ///////////////
@@ -85,7 +78,7 @@ app.put('/eliminar/:id', (req, res) => {
 
 app.get('/reserva', function (req, res) {
     res.json(cine.reserva);
-    });
+});
 
 app.get('/reserva/:id', function (req, res) {
     let id = req.params.id;
@@ -101,11 +94,14 @@ app.post('/reserva', (req, res) => {
     let reservas = cine.reserva.filter(r => r.salaId == salaId);
 
     //conseguir la capacidad de esa sala en especifico
-    let cap = cine.sala.filter(s => s.id == salaId)[0].capacidad;
-
-    //verificamos la cantidad de asientos disponibles
-    for(let i = 0; i > reservas.length; i++ )
+    let cap = cine.sala.filter(s => s.id == salaId)[0]?.capacidad;
+    if(!cap )
     {
+        res.send("mal ahi x2");
+        return;
+    }
+    //verificamos la cantidad de asientos disponibles
+    for (let i = 0; i > reservas.length; i++) {
         asientosOcupados = asientosOcupados + reservas[i].cantAsientos
     }
 
@@ -113,7 +109,7 @@ app.post('/reserva', (req, res) => {
 
     if (totalAsientos > 0) {
         let id = cine.reserva[cine.reservas.length - 1].id + 1;
-        let nuevaRes = { id , ...req.body };
+        let nuevaRes = { id, ...req.body };
         cine.reserva.push(nuevaRes);
         fs.writeFileSync("./cine.json", JSON.stringify(cine));
         res.json(cine);
@@ -125,7 +121,7 @@ app.post('/reserva', (req, res) => {
 
 app.put('/reserva/:id', (req, res) => {
     const { id } = req.params.id;
-    const { cantiAsientos, salaId} = req.body;
+    const { cantiAsientos, salaId } = req.body;
     if (cantiAsientos && salaId) {
         cine.reserva.forEach(r => {
             if (r.id == id) {
