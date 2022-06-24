@@ -1,28 +1,24 @@
-import { useState, useEffect } from "react";
 import { cambiarCartelera } from "../../servicios/PeliculaServicio";
-import {} from "";
-export default function Read() {
+import { useState } from "react";
 
-  const RenderTitlesB = () => {
-    return (
-      <div>
-        {APIData.map(({ id, title, enCartelera }) => (
-          <div>
-            <a key={id}>{id}: {title} </a>
-            <button onClick={() => cambiarCartelera(id, enCartelera)}>{enCartelera ? " en cartelera" : " fuera de cartelera"}</button>
-          </div>
-        ))}
-      </div>
-    );
+export default function Read(props) {
+
+  const { id, titulo, enCartelera } = props;
+
+  const [cartelera, setCartelera] = useState(enCartelera);
+
+  const actualizar = () => {
+    setCartelera(!cartelera);
+    cambiarCartelera(id);
   }
 
-    return (
+  
+  return (
+    <>
       <div>
-        <br />
-        <>peliculas:</>
-        <br />
-        {APIData ? <div>{console.log(APIData)}</div> : <span>Espere</span>}
-        <RenderTitlesB />
+        <input type="text" value={titulo} disabled/>
+        <button onClick={() => actualizar()}>{cartelera? "en Cartelera " : "no esta en Cartelera "}</button>
       </div>
-    )
+    </>
+  )
 }

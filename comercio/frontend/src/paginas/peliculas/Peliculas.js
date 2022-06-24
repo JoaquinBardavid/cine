@@ -1,6 +1,9 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import { getPeliculasPorId, getPeliculas } from "../../servicios/PeliculaServicio";
+import { getPeliculas } from "../../servicios/PeliculaServicio";
+import Read from "../../componentes/peliculas/Read";
+import NuevaPeli from "../../componentes/peliculas/NuevaPeli";
+import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
 
 export default function Home() {
 
@@ -26,9 +29,18 @@ export default function Home() {
     return (
         <div>
             {ingreso ?
-                <Typography>
-                    Bienvenido :D
-                </Typography> :
+                <div>
+                    {APIData.map(pelicula => {
+                        return (
+                            <>
+                                <Read id={pelicula.id} titulo={pelicula.titulo} enCartelera={pelicula.enCartelera} key={pelicula.id} />
+                                <BorrarPeli id={pelicula.id}/>
+                                <br /><br />
+                            </>
+                        )
+                    })}
+                    <NuevaPeli />
+                </div> :
                 <>
                     <TextField size="small" placeholder="Contraseña" onChange={contraAux} />
                     <Button size="large" onClick={verificar}>Verificar</Button>

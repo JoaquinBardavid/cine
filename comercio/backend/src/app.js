@@ -31,7 +31,7 @@ app.get('/pelicula/:id', function (req, res) {
 
 app.post('/pelicula', (req, res) => {
     const { titulo, enCartelera } = req.body;
-    if (titulo && enCartelera) {
+    if (titulo) {
         let id = cine.pelicula[cine.pelicula.length - 1].id + 1;
         let newMovie = { id, ...req.body };
         cine.pelicula.push(newMovie);
@@ -45,11 +45,11 @@ app.post('/pelicula', (req, res) => {
 
 app.put('/pelicula', (req, res) => {
     const { id } = req.query;
-    const { title, enCartelera } = req.body;
-    if (title && enCartelera) {
+    const { titulo } = req.body;
+    if (titulo) {
         cine.pelicula.forEach(movie => {
             if (movie.id == id) {
-                movie.title = title;
+                movie.titulo = titulo;
             }
         });
         fs.writeFileSync("./cine.json", JSON.stringify(cine));
@@ -61,13 +61,13 @@ app.put('/pelicula', (req, res) => {
 });
 
 app.put('/cambioCartelera/:id', (req, res) => {
-    const { id } = req.query;
-    cine.pelicula.forEach(movie => {
-        if (movie.id == id) {
-            movie.enCartelera = !movie.enCartelera
+    let id = req.params.id;
+    cine.pelicula.forEach(p => {
+        if (p.id == id) {
+            p.enCartelera = !p.enCartelera;
         }
     });
-    fs.writeFileSync("./movies.json", JSON.stringify(cine));
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
     res.json(cine);
 });
 

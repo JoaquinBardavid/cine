@@ -18,8 +18,7 @@ export default function Reservas() {
       <div style={{ textAlign: "center" }}>
         <Typography>Reservas</Typography>
         <div className="render-boton">
-          {
-            APIData ?
+          {APIData ?
               APIData.map((pelicula) => {
                 return (
                   <PeliculaReservaBoton key={pelicula.id} id={pelicula.id} />
