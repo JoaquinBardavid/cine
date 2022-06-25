@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { Button } from "@mui/material";
 
 export default function BorrarPeli(props) {
-    
-    const [boton, setBoton] = useState(false)
+
+    const { id, borrar } = props;
 
     return (
-        <>
-            {boton? <button type="borrar">Borrar</button> : <button onClick={() => setBoton(!boton)}>Borrar</button>}
-            
-        </>
+        <div style={{ display: "flex", alignItems: "center" }}>
+            <Button onClick={()=>borrar(id)}>Borrar</Button>
+        </div>
     );
 }

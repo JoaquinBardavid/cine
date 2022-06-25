@@ -1,6 +1,6 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import { getPeliculas, cambiarCartelera } from "../../servicios/PeliculaServicio";
+import { getPeliculas, cambiarCartelera, borrarPelicula } from "../../servicios/PeliculaServicio";
 import Read from "../../componentes/peliculas/Read";
 import NuevaPeli from "../../componentes/peliculas/NuevaPeli";
 import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
@@ -33,6 +33,12 @@ export default function Home() {
     setAPIData(data)
   }
 
+  const borrar = async (id) => {
+    await borrarPelicula(id)
+    const data = await getPeliculas()
+    setAPIData(data)
+}
+
     return (
         <div>
             {ingreso ?
@@ -41,11 +47,10 @@ export default function Home() {
                         return (
                             <div style={ {marginBottom: 20} }  key={pelicula.id}  >
                                 <Read id={pelicula.id} titulo={pelicula.titulo} sala={pelicula.sala} actualizar={actualizar}/>
-                                <BorrarPeli id={pelicula.id} />
+                                <Button id={pelicula.id} borrar={borrar}>Borrar</Button>
                             </div>
                         )
                     })}
-                    <NuevaPeli />
                 </div> :
                 <>
                     <TextField size="small" placeholder="Contraseña" onChange={contraAux} />

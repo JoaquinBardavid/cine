@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useState } from "react";
 import { MenuItem, Select, TextField, Button } from "@mui/material";
 
 export default function Read(props) {
@@ -9,26 +9,25 @@ export default function Read(props) {
 
   return (
 
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <TextField size="small" value={titulo} disabled />
-
-        <Button size="large" onClick={() => {
-          actualizar(id, nuevaSala);
-          setNuevaSala(0)
-          }}>
-            {sala == 0 ? "no esta en Cartelera " :  "en Cartelera "}
-        </Button>
-        {sala == 0 ?
-            <Select displayEmpty onChange={(e) => setNuevaSala(e.target.value)}>
-              <MenuItem disabled>
-                <em>Elija una sala</em>
-              </MenuItem>
-              <MenuItem value={1} >Sala 1</MenuItem>
-              <MenuItem value={2}>Sala 2</MenuItem>
-              <MenuItem value={3}>Sala 3</MenuItem>
-            </Select> :
-          `Disponible en la sala ${sala}` }
-      </div>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <TextField size="small" value={titulo} disabled />
+      {sala == 0 ?
+        <Select displayEmpty onChange={(e) => setNuevaSala(e.target.value)}>
+          <MenuItem disabled>
+            <em>Elija una sala</em>
+          </MenuItem>
+          <MenuItem value={1} >Sala 1</MenuItem>
+          <MenuItem value={2}>Sala 2</MenuItem>
+          <MenuItem value={3}>Sala 3</MenuItem>
+        </Select> :
+        `Disponible en la sala ${sala}`}
+      <Button size="large" onClick={() => {
+        actualizar(id, nuevaSala);
+        setNuevaSala(0)
+      }}>
+        {sala == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
+      </Button>
+    </div>
   )
 }
 

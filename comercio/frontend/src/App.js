@@ -16,7 +16,7 @@ const theme = createTheme ({
     MuiLink:{
       styleOverrides: {
         root: {
-          margin: 5
+          margin: 10
         }
       }
     }

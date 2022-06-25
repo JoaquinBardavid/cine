@@ -30,34 +30,25 @@ app.get('/pelicula/:id', function (req, res) {
 });
 
 app.post('/pelicula', (req, res) => {
-    const { titulo, enCartelera } = req.body;
-    if (titulo) {
-        let id = cine.pelicula[cine.pelicula.length - 1].id + 1;
-        let newMovie = { id, ...req.body };
-        cine.pelicula.push(newMovie);
-        fs.writeFileSync("./cine.json", JSON.stringify(cine));
-        res.json(cine.pelicula);
-    }
-    else {
-        res.send('<div>hubo un error agregando la pelicula</div>');
-    }
+
+    let id = cine.pelicula[cine.pelicula.length - 1].id + 1;
+    let newMovie = { id, ...req.body };
+    cine.pelicula.push(newMovie);
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.json(cine.pelicula);
+
 });
 
 app.put('/pelicula', (req, res) => {
     const { id } = req.query;
     const { titulo } = req.body;
-    if (titulo) {
-        cine.pelicula.forEach(movie => {
-            if (movie.id == id) {
-                movie.titulo = titulo;
-            }
-        });
-        fs.writeFileSync("./cine.json", JSON.stringify(cine));
-        res.json(cine.pelicula);
-    }
-    else {
-        res.send('<div>hubo un error editando la pelicula</div>');
-    }
+    cine.pelicula.forEach(movie => {
+        if (movie.id == id) {
+            movie.titulo = titulo;
+        }
+    });
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.json(cine.pelicula);
 });
 
 app.put('/cambioCartelera/:id', (req, res) => {
@@ -72,10 +63,21 @@ app.put('/cambioCartelera/:id', (req, res) => {
     res.json(cine);
 });
 
+app.delete('/pelicula/:id', (req, res) => {
+    let id  = req.params.id;
+
+    cine.pelicula.forEach(p => {
+        if (p.id == id) {
+            cine.pelicula.splice(cine.pelicula.indexOf(p),1) 
+        }
+    });
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.json(cine);
+});
+
 //////////////////////////////////////
 ///////////// Reservas ///////////////
 //////////////////////////////////////
-
 
 app.get('/reserva', function (req, res) {
     res.json(cine.reserva);

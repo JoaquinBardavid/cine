@@ -55,3 +55,21 @@ export async function nuevaPelicula(titulo, cartelera) {
     return console.error(e);
   }
 }
+
+export async function borrarPelicula(id) {
+
+  try {
+    const url = urlBase + "pelicula/" + id
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': "application/json",
+      },
+    })
+    const data = await res.json();
+    return await data;
+  } catch (e) {
+    console.error(e);
+  }
+
+}
