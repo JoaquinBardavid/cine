@@ -42,7 +42,7 @@ export default function ReservaPeliculas() {
                     onChange={handleSelectChange}
                 />
                 <br/>
-                <p>Cantidad de entradas seleccionadas: {cantiEntradas}</p>
+                <div>Cantidad de entradas seleccionadas: {cantiEntradas}</div>
                 <button onClick={()=> {modificarPelicula(cantiEntradas, 1/*salaData.id*/)}}>Cargar Reserva</button>
             </div>
         </>

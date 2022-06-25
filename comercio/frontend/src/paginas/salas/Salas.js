@@ -57,7 +57,6 @@ export default function Salas() {
             var reader = new FileReader();
             reader.readAsDataURL(archivo);
             reader.onload = function () {
-                var arrayAuxiliar = [];
                 var base64 = reader.result;
                 setImagen(base64)
             }

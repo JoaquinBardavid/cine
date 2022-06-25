@@ -62,9 +62,10 @@ app.put('/pelicula', (req, res) => {
 
 app.put('/cambioCartelera/:id', (req, res) => {
     let id = req.params.id;
+    let salaId = req.body.salaId;
     cine.pelicula.forEach(p => {
         if (p.id == id) {
-            p.enCartelera = !p.enCartelera;
+           p.sala = salaId;
         }
     });
     fs.writeFileSync("./cine.json", JSON.stringify(cine));

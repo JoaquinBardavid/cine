@@ -17,7 +17,7 @@ export async function getPeliculasPorId(id) {
   }
 }
 
-export async function cambiarCartelera(id) {
+export async function cambiarCartelera(id, salaId) {
 
   try {
     const url = urlBase + "cambioCartelera/" + id
@@ -26,6 +26,9 @@ export async function cambiarCartelera(id) {
       headers: {
         'Content-type': "application/json",
       },
+      body: JSON.stringify({
+        salaId: salaId
+      })
     })
     const data = await res.json();
     return await data;
