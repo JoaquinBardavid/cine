@@ -23,3 +23,4 @@ export async function nuevaReserva(cantEntradas, peliId) {
       return console.error(e);
     }
   }
+  

@@ -22,17 +22,29 @@ const theme = createTheme({
         }
       }
     },
+    MuiList:{
+      styleOverrides:{
+        root:{
+           color:"ced4da",
+           backgroundColor:"gray"
+        }
+      }
+    },
     MuiButton:{
       styleOverrides:{
         root:{
-          color:"white"
+          color:"#ced4da",
+          backgroundColor:"gray",
+          margin:5
         }
       }
     },
     MuiTextField:{
       styleOverrides:{
         root:{
-          background:"white"
+          color:"#ced4da",
+          background:"gray",
+          borderRadius:10
         }
       }
     }
@@ -42,10 +54,10 @@ const theme = createTheme({
       default: "#222222"
     },
     text: {
-      primary: "#000000"
+      primary: "#ced4da"
     },
     primary:{
-      main: "#ae2012"
+      main: "#660708"
     }
   }
 })

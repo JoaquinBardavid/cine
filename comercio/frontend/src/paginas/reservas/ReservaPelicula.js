@@ -21,6 +21,8 @@ export default function ReservaPeliculas() {
 
     }, []);
 
+
+    
     return (
         <>
             {APIReservas? <NuevaReserva peliId={id} titulo={APIPelicula.titulo} reservas={APIReservas} /> : <span>Espere...</span>}

@@ -1,18 +1,26 @@
 import { useState } from "react";
-import { MenuItem, Select, TextField, Button } from "@mui/material";
+import { MenuItem, Select, TextField, Button, Grid } from "@mui/material";
 
 export default function Read(props) {
 
-  const { id, titulo, sala, actualizar } = props;
+  const { id, titulo, salaId, actualizar } = props;
 
   const [nuevaSala, setNuevaSala] = useState(0);
 
   return (
 
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <Grid
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      alignItems="center"
+    >
       <TextField size="small" value={titulo} disabled />
-      {sala == 0 ?
-        <Select displayEmpty onChange={(e) => setNuevaSala(e.target.value)}>
+      {salaId == 0 ?
+        <Select
+          displayEmpty
+          onChange={(e) => setNuevaSala(e.target.value)}
+        >
           <MenuItem disabled>
             <em>Elija una sala</em>
           </MenuItem>
@@ -20,14 +28,14 @@ export default function Read(props) {
           <MenuItem value={2}>Sala 2</MenuItem>
           <MenuItem value={3}>Sala 3</MenuItem>
         </Select> :
-        `Disponible en la sala ${sala}`}
+        `Disponible en la sala ${salaId}`}
       <Button size="large" onClick={() => {
         actualizar(id, nuevaSala);
         setNuevaSala(0)
       }}>
-        {sala == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
+        {salaId == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
       </Button>
-    </div>
+    </Grid>
   )
 }
 

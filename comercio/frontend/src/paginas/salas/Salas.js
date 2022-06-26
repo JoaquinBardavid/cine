@@ -2,23 +2,19 @@ import { useState } from "react";
 import { ButtonBase, styled, Typography, Box } from "@mui/material";
 
 
-const ImageSrc = styled('span')({
+const ImageSrc = styled('div')({
     position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    height: 200,
+    width: 200,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center 40%',
 });
 
 const Image = styled('span')(({ theme }) => ({
-    position: 'fixed',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
+    position: 'inherit',
+    height: 200,
+    width: 200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -53,6 +49,7 @@ export default function Salas() {
 
 
     const convertirABase64 = (archivos) => {
+        console.log(archivos)
         Array.from(archivos).forEach(archivo => {
             var reader = new FileReader();
             reader.readAsDataURL(archivo);

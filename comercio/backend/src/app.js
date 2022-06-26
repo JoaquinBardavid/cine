@@ -7,7 +7,7 @@ const { json } = require("express");
 const port = 5000;
 
 app.use(express.json())
-app.use(cors())
+app.use(cors());
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
@@ -56,7 +56,7 @@ app.put('/cambioCartelera/:id', (req, res) => {
     let salaId = req.body.salaId;
     cine.pelicula.forEach(p => {
         if (p.id == id) {
-           p.sala = salaId;
+            p.salaId = salaId;
         }
     });
     fs.writeFileSync("./cine.json", JSON.stringify(cine));
@@ -64,11 +64,11 @@ app.put('/cambioCartelera/:id', (req, res) => {
 });
 
 app.delete('/pelicula/:id', (req, res) => {
-    let id  = req.params.id;
+    let id = req.params.id;
 
     cine.pelicula.forEach(p => {
         if (p.id == id) {
-            cine.pelicula.splice(cine.pelicula.indexOf(p),1) 
+            cine.pelicula.splice(cine.pelicula.indexOf(p), 1)
         }
     });
     fs.writeFileSync("./cine.json", JSON.stringify(cine));
@@ -101,20 +101,15 @@ app.post('/reserva', (req, res) => {
 
 app.put('/reserva/:id', (req, res) => {
     const { id } = req.params.id;
-    const { cantiAsientos, salaId } = req.body;
-    if (cantiAsientos && salaId) {
-        cine.reserva.forEach(r => {
-            if (r.id == id) {
-                r.cantAsientos = cantiAsientos;
-                r.salaId = salaId;
-            }
-        });
-        fs.writeFileSync("./cine.json", JSON.stringify(cine));
-        res.json(cine);
-    }
-    else {
-        res.send('<div>hubo un error editando la pelicula</div>');
-    }
+    cine.reserva.forEach(r => {
+        if (r.id == id) {
+            r.cantAsientos = cantiAsientos;
+            r.salaId = salaId;
+        }
+    });
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.json(cine);
+
 });
 
 app.delete('/reserva/:id', (req, res) => {

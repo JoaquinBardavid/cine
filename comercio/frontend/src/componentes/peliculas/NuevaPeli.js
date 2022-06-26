@@ -1,41 +1,40 @@
-import { nuevaPelicula } from "../../servicios/PeliculaServicio";
+
 import { useState } from "react";
-import { Button, MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select, TextField, Grid } from "@mui/material";
 
-export default function NuevaPeli() {
+export default function NuevaPeli(props) {
 
-    const [inputTitulo, setTitulo] = useState("")
-    const [sala, setSala] = useState(0)
+    const { validar } = props
 
-    const validar = () => {
-        if (inputTitulo != "") {
-            alert(`Se agregó la pelicula ${inputTitulo} Correctamente!`)
-            nuevaPelicula(inputTitulo, sala)
-        } else {
-            alert("escriba algo valido por el amor a dios");
-        }
-    }
+    const [titulo, setTitulo] = useState("")
+    const [salaId, setSala] = useState(0)
 
     return (
-        <>
+        <Grid
+            container
+            direction="column"
+            justifyContent="space-evenly"
+            alignItems="left"
+        >
             <label>Titulo</label>
-            <input
+            <TextField
                 onChange={(e) => setTitulo(e.target.value)}
                 type="text"
                 placeholder="Titulo"
+                size="small"
             />
-            <br />
             <label>Sala</label>
-            <Select displayEmpty onChange={(e) => setSala(e.target.value)}>
+            <Select displayEmpty onChange={(e) => setSala(e.target.value)} style={{ marginBottom: 50 }}>
                 <MenuItem disabled>
                     <em>Elija una sala</em>
                 </MenuItem>
-                <MenuItem value={1} >Sala 1</MenuItem>
+                <MenuItem value={1}>Sala 1</MenuItem>
                 <MenuItem value={2}>Sala 2</MenuItem>
                 <MenuItem value={3}>Sala 3</MenuItem>
             </Select>
-            <Button href="/peliculas" onClick={() => validar()}>Agregar</Button>
+            <br />
+            <Button onClick={() => validar(titulo, salaId)}>Agregar Pelicula</Button>
             <Button href="/peliculas">Volver</Button>
-        </>
+        </Grid>
     );
 }

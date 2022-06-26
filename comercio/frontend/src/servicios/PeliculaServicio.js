@@ -38,14 +38,14 @@ export async function cambiarCartelera(id, salaId) {
 
 }
 
-export async function nuevaPelicula(titulo, sala) {
+export async function nuevaPelicula(titulo, salaId) {
   const url = urlBase + "pelicula";
   const settings = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ titulo: titulo, sala: sala })
+    body: JSON.stringify({ titulo: titulo, salaId: salaId })
   };
   try {
     const res = await fetch(url, settings);

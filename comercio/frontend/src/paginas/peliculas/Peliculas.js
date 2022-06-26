@@ -1,9 +1,7 @@
-import { Button, Link, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getPeliculas, cambiarCartelera, borrarPelicula } from "../../servicios/PeliculaServicio";
-import ModificarPeliculas from "./ModificarPeliculas"
 import Read from "../../componentes/peliculas/Read";
-import NuevaPeli from "../../componentes/peliculas/NuevaPeli";
 import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
 
 export default function Home() {
@@ -27,7 +25,6 @@ export default function Home() {
         })()
     }, []);
 
-
     const actualizar = async (id, nuevaSala) => {
         await cambiarCartelera(id, nuevaSala)
         const data = await getPeliculas()
@@ -45,17 +42,22 @@ export default function Home() {
     return (
         <div>
             {ingreso ?
-                <div>
-                    <Button href="/peliculas/nueva" color="inherit" >Crear Pelicula</Button>
+                <Grid
+                    container
+                    direction="column"
+                    justifyContent="space-around"
+                    alignItems="flex-start"
+                >
+                    <Button size="large" href="/peliculas/nueva">Crear Pelicula</Button>
                     {APIData.map(pelicula => {
                         return (
-                            <div style={{ marginBottom: 20 }} key={pelicula.id}  >
-                                <Read id={pelicula.id} titulo={pelicula.titulo} sala={pelicula.sala} actualizar={actualizar} />
+                            <div style={{ margin: 20, backgroundColor:"#343a40", width:"100%", borderRadius:10, padding:10}}  key={pelicula.id}  >
+                                <Read id={pelicula.id} titulo={pelicula.titulo} salaId={pelicula.salaId} actualizar={actualizar} />
                                 <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
                             </div>
                         )
                     })}
-                </div> :
+                </Grid> :
                 <>
                     <TextField size="small" placeholder="Contraseña" onChange={contraAux} />
                     <Button size="large" onClick={verificar}>Verificar</Button>
