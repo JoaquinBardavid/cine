@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Avatar } from "@mui/material";
 
 export default function BorrarPeli(props) {
 
@@ -6,7 +6,10 @@ export default function BorrarPeli(props) {
 
     return (
         <div>
-            <Button onClick={()=>borrar(id)}>Borrar</Button>
+            <Button 
+            onClick={()=>borrar(id)}>
+                Borrar
+                </Button>
         </div>
     );
 }

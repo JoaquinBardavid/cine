@@ -65,7 +65,7 @@ export default function Salas() {
 
     return (
         <>
-            <div style={{width: 200}}>
+            <div style={{ width: 200 }}>
                 <input type="file" accept="image/*" multiple onChange={(e) => convertirABase64(e.target.files)} />
                 {imagen ?
                     <Box>
@@ -75,7 +75,7 @@ export default function Salas() {
                                 height: "inherit",
                                 width: "min-content",
                                 position: "inherit",
-                              }}
+                            }}
                         >
                             <ImageSrc style={{ backgroundImage: `url(${imagen})` }} />
                             <Image>

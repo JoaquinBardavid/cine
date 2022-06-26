@@ -85,41 +85,18 @@ app.get('/reserva', function (req, res) {
 
 app.get('/reserva/:id', function (req, res) {
     let id = req.params.id;
-    let reserva = cine.reserva.filter(r => r.id == id)[0];
+    let reserva = cine.reserva.filter(r => r.peliId == id);
     res.json(reserva);
 });
 
 app.post('/reserva', (req, res) => {
-    const { cantAsientos, salaId } = req.body;
-    let asientosOcupados = cantAsientos;//inicializamos con la cantidad de asientos agregados para mas adelante sabes si exceden la capacidad de la sala
 
-    //conseguir las reservas por sala
-    let reservas = cine.reserva.filter(r => r.salaId == salaId);
+    let id = cine.reserva[cine.reserva.length - 1].id + 1;
+    let nuevaRes = { id, ...req.body };
+    cine.reserva.push(nuevaRes);
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.json(cine);
 
-    //conseguir la capacidad de esa sala en especifico
-    let cap = cine.sala.filter(s => s.id == salaId)[0]?.capacidad;
-    if(!cap )
-    {
-        res.send("mal ahi x2");
-        return;
-    }
-    //verificamos la cantidad de asientos disponibles
-    for (let i = 0; i > reservas.length; i++) {
-        asientosOcupados = asientosOcupados + reservas[i].cantAsientos
-    }
-
-    let totalAsientos = cap - asientosOcupados;
-
-    if (totalAsientos > 0) {
-        let id = cine.reserva[cine.reservas.length - 1].id + 1;
-        let nuevaRes = { id, ...req.body };
-        cine.reserva.push(nuevaRes);
-        fs.writeFileSync("./cine.json", JSON.stringify(cine));
-        res.json(cine);
-    }
-    else {
-        res.send('<div>No hay butacas disponibles</div>');
-    }
 });
 
 app.put('/reserva/:id', (req, res) => {

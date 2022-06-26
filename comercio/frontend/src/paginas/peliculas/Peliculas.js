@@ -27,30 +27,30 @@ export default function Home() {
         })()
     }, []);
 
- 
-  const actualizar = async (id, nuevaSala) => {
-    await cambiarCartelera(id, nuevaSala)
-    const data = await getPeliculas()
-    setAPIData(data)
-    alert("La pelicula se agregó correctamente")
-  }
 
-  const borrar = async (id) => {
-    await borrarPelicula(id)
-    const data = await getPeliculas()
-    setAPIData(data)
-    alert("La pelicula se borró correctamente")
-}
+    const actualizar = async (id, nuevaSala) => {
+        await cambiarCartelera(id, nuevaSala)
+        const data = await getPeliculas()
+        setAPIData(data)
+        alert("La pelicula se agregó correctamente")
+    }
+
+    const borrar = async (id) => {
+        await borrarPelicula(id)
+        const data = await getPeliculas()
+        setAPIData(data)
+        alert("La pelicula se borró correctamente")
+    }
 
     return (
         <div>
             {ingreso ?
                 <div>
-                    <Button href="/peliculas/nueva" color="inherit" underline="none" component="button" variant="body2">Crear Pelicula</Button>
+                    <Button href="/peliculas/nueva" color="inherit" >Crear Pelicula</Button>
                     {APIData.map(pelicula => {
                         return (
-                            <div style={ {marginBottom: 20} }  key={pelicula.id}  >
-                                <Read id={pelicula.id} titulo={pelicula.titulo} sala={pelicula.sala} actualizar={actualizar}/>
+                            <div style={{ marginBottom: 20 }} key={pelicula.id}  >
+                                <Read id={pelicula.id} titulo={pelicula.titulo} sala={pelicula.sala} actualizar={actualizar} />
                                 <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
                             </div>
                         )

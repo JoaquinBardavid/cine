@@ -1,23 +1,25 @@
 const urlBase = 'http://localhost:5000/';
 
-export async function obtenerSalaEffectUnico(id) {
-    const url = urlBase + "sala/"+ id ;
+export async function getReservasPorPeliID(id) {
+    const url = urlBase + "reserva/" + id ;
     const res = await fetch(url)
     return await res.json();
 }
 
-
-export  function modificarPelicula(selectValor,salaId) {
+export async function nuevaReserva(cantEntradas, peliId) {
     const url = urlBase + "reserva";
-    const res =  fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            cantAsientos: selectValor ,
-            salaId: salaId,
-         })
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cantAsientos: cantEntradas, peliId: peliId })
+    };
+    try {
+      const res = await fetch(url, settings);
+      const data = await res.json();
+      return data;
+    } catch (e) {
+      return console.error(e);
     }
-    )
-}
+  }
