@@ -1,6 +1,7 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Link, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getPeliculas, cambiarCartelera, borrarPelicula } from "../../servicios/PeliculaServicio";
+import ModificarPeliculas from "./ModificarPeliculas"
 import Read from "../../componentes/peliculas/Read";
 import NuevaPeli from "../../componentes/peliculas/NuevaPeli";
 import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
@@ -31,23 +32,26 @@ export default function Home() {
     await cambiarCartelera(id, nuevaSala)
     const data = await getPeliculas()
     setAPIData(data)
+    alert("La pelicula se agregó correctamente")
   }
 
   const borrar = async (id) => {
     await borrarPelicula(id)
     const data = await getPeliculas()
     setAPIData(data)
+    alert("La pelicula se borró correctamente")
 }
 
     return (
         <div>
             {ingreso ?
                 <div>
+                    <Button href="/peliculas/nueva" color="inherit" underline="none" component="button" variant="body2">Crear Pelicula</Button>
                     {APIData.map(pelicula => {
                         return (
                             <div style={ {marginBottom: 20} }  key={pelicula.id}  >
                                 <Read id={pelicula.id} titulo={pelicula.titulo} sala={pelicula.sala} actualizar={actualizar}/>
-                                <Button id={pelicula.id} borrar={borrar}>Borrar</Button>
+                                <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
                             </div>
                         )
                     })}

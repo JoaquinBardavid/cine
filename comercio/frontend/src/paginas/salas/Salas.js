@@ -26,7 +26,7 @@ const Image = styled('span')(({ theme }) => ({
 }));
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
-    position: 'absolute',
+    position: 'flex',
     height: 100,
     width: 100,
     [theme.breakpoints.down('sm')]: {
@@ -65,12 +65,17 @@ export default function Salas() {
 
     return (
         <>
-            <div>
+            <div style={{width: 200}}>
                 <input type="file" accept="image/*" multiple onChange={(e) => convertirABase64(e.target.files)} />
                 {imagen ?
-                    <Box sx={{ display: 'flex', width: 300 }}>
+                    <Box>
                         <ImageButton
                             focusRipple
+                            style={{
+                                height: "inherit",
+                                width: "min-content",
+                                position: "inherit",
+                              }}
                         >
                             <ImageSrc style={{ backgroundImage: `url(${imagen})` }} />
                             <Image>
