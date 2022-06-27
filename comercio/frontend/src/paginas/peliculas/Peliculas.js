@@ -1,7 +1,7 @@
 import { Button, Grid, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getPeliculas, cambiarCartelera, borrarPelicula } from "../../servicios/PeliculaServicio";
-import Read from "../../componentes/peliculas/Read";
+import ModificarPeli from "../../componentes/peliculas/ModificarPeli";
 import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
 
 export default function Home() {
@@ -40,7 +40,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div >
             {ingreso ?
                 <Grid
                     container
@@ -51,17 +51,22 @@ export default function Home() {
                     <Button size="large" href="/peliculas/nueva">Crear Pelicula</Button>
                     {APIData.map(pelicula => {
                         return (
-                            <div style={{ margin: 20, backgroundColor:"#343a40", width:"100%", borderRadius:10, padding:10}}  key={pelicula.id}  >
-                                <Read id={pelicula.id} titulo={pelicula.titulo} salaId={pelicula.salaId} actualizar={actualizar} />
+                            <div style={{ margin: 20, backgroundColor: "#343a40", width: "100%", borderRadius: 10, padding: 10 }} key={pelicula.id}  >
+                                <ModificarPeli id={pelicula.id} titulo={pelicula.titulo} salaId={pelicula.salaId} actualizar={actualizar} img={pelicula.img}/>
                                 <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
                             </div>
                         )
                     })}
                 </Grid> :
-                <>
-                    <TextField size="small" placeholder="Contraseña" onChange={contraAux} />
-                    <Button size="large" onClick={verificar}>Verificar</Button>
-                </>
+                <Grid
+                    container
+                    direction="column"
+                    justifyContent="space-around"
+                    alignItems="flex-start"
+                    >
+                    <TextField item xs={2} size="small" placeholder="Contraseña" onChange={contraAux} style={{marginTop:10}}/>
+                    <Button item xs={1} size="large" onClick={verificar}>Verificar</Button>
+                </Grid>
             }
         </div>
     )

@@ -3,7 +3,7 @@ import { MenuItem, Select, TextField, Button, Grid } from "@mui/material";
 
 export default function Read(props) {
 
-  const { id, titulo, salaId, actualizar } = props;
+  const { id, titulo, salaId, actualizar, img } = props;
 
   const [nuevaSala, setNuevaSala] = useState(0);
 
@@ -35,6 +35,7 @@ export default function Read(props) {
       }}>
         {salaId == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
       </Button>
+      {img? <img width={200} src={img}/> : <>SIN FOTO :C</>}
     </Grid>
   )
 }

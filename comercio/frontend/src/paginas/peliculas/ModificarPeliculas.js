@@ -4,9 +4,10 @@ import { nuevaPelicula } from "../../servicios/PeliculaServicio";
 
 export default function ModificarPeliculas() {
     const navigate = useNavigate();
-    const validar = async (titulo, sala) => {
+    
+    const validar = async (titulo, sala, imagen) => {
         if (titulo != "") {
-            nuevaPelicula(titulo, sala)
+            nuevaPelicula(titulo, sala, imagen)
             alert(`Se agregó la pelicula ${titulo} Correctamente!`) 
             navigate(-1)
 

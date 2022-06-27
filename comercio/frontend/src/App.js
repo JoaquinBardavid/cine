@@ -4,7 +4,6 @@ import Home from "./paginas/Home";
 import Peliculas from "./paginas/peliculas/Peliculas";
 import ReservaPelicula from "./paginas/reservas/ReservaPelicula";
 import Reservas from "./paginas/reservas/Reservas";
-import Salas from "./paginas/salas/Salas";
 import ModificarPeliculas from "./paginas/peliculas/ModificarPeliculas";
 import "./App.css"
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
@@ -39,12 +38,17 @@ const theme = createTheme({
         }
       }
     },
-    MuiTextField:{
+    MuiInputBase:{
       styleOverrides:{
-        root:{
+        input:{
           color:"#ced4da",
-          background:"gray",
+          backgroundColor:"gray",
+          alignSelf:"center",
           borderRadius:10
+        },
+        root:{
+          display:"flex",
+          alignContent:"center"
         }
       }
     }
@@ -75,7 +79,6 @@ export default function App() {
             <Route path="peliculas/nueva" element={<ModificarPeliculas />}></Route>
             <Route path="reservas" element={<Reservas />}></Route>
             <Route path='/reservas/:id' element={<ReservaPelicula />} ></Route>
-            <Route path="salas" element={<Salas />}></Route>
             <Route path="*" element={<h1>404</h1>}></Route>
           </Route>
         </Routes>
