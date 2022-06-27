@@ -29,7 +29,7 @@ export default function NuevaReserva(props) {
           alert("Reserva Completada!")
           navigate(-1);
         } else {
-          alert(`quedan solo ${asientos}`)
+          alert(`quedan ${asientos} entradas`)
         }
         break;
     }

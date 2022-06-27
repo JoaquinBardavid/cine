@@ -14,7 +14,7 @@ export default function Home() {
     const verificar = () => {
         let aux = contraseña;
         aux = aux.toLowerCase();
-        aux == "contraseña" ? setIngreso(true) : console.log("mal ahi");
+        aux == "contraseña1" ? setIngreso(true) :alert("Contraseña incorrecta");
     }
 
     const contraAux = (e) => setContraseña(e.target.value);

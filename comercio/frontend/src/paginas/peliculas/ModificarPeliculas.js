@@ -12,7 +12,7 @@ export default function ModificarPeliculas() {
             navigate(-1)
 
         } else {
-            alert("escriba algo valido por el amor a dios");
+            alert("Debe ingresar un titulo");
         }
     }
 

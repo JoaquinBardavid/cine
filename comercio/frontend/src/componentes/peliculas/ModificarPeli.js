@@ -36,7 +36,7 @@ export default function ModificarPeli(props) {
       }}>
         {salaId == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
       </Button>
-      {img ? <img width={200} src={img} /> : <>SIN FOTO :C</>}
+      {img ? <img width={200} src={img} /> : <>SIN FOTO ADJUNTA</>}
     </Grid>
   )
 }

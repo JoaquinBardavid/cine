@@ -13,7 +13,6 @@ export default function NuevaPeli(props) {
     const convertirABase64 = (archivo) => {
 
         var reader = new FileReader();
-        console.log(archivo)
         reader.readAsDataURL(archivo);
         reader.onload = function () {
             var base64 = reader.result;
