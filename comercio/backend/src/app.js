@@ -7,7 +7,7 @@ const { json } = require("express");
 const port = 5000;
 
 app.use(express.json({
-    limit:"50mb"
+    limit: "50mb"
 }))
 app.use(cors());
 
@@ -100,3 +100,13 @@ app.post('/reserva', (req, res) => {
     res.send(200);
 
 });
+
+app.delete('/reserva/:id', (req, res) => {
+    const id = req.params.id;
+    let aux = [];
+    aux = cine.reserva.filter(a => a.peliId != id) 
+    cine.reserva = aux;
+    fs.writeFileSync("./cine.json", JSON.stringify(cine));
+    res.send(200);
+});
+

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getPeliculas, cambiarCartelera, borrarPelicula } from "../../servicios/PeliculaServicio";
 import ModificarPeli from "../../componentes/peliculas/ModificarPeli";
 import BorrarPeli from "../../componentes/peliculas/BorrarPeli";
+import { borrarReserva } from "../../servicios/ReservaServicio";
 
 export default function Home() {
 
@@ -32,6 +33,7 @@ export default function Home() {
 
     const borrar = async (id) => {
         await borrarPelicula(id)
+        await borrarReserva(id)
         const data = await getPeliculas()
         setAPIData(data)
         alert("La pelicula se borró correctamente")

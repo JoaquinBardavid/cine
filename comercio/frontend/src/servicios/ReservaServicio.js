@@ -24,3 +24,20 @@ export async function nuevaReserva(cantEntradas, peliId) {
     }
   }
   
+  export async function borrarReserva(id) {
+
+    try {
+      const url = urlBase + "reserva/" + id
+      const res = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': "application/json",
+        },
+      })
+      const data = await res.json();
+      return await data;
+    } catch (e) {
+      console.error(e);
+    }
+  
+  }
