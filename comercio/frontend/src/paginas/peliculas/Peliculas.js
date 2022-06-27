@@ -28,9 +28,7 @@ export default function Home() {
     const actualizar = async (id, nuevaSala) => {
         await cambiarCartelera(id, nuevaSala)
         const data = await getPeliculas()
-        setAPIData(data)
-        alert("La pelicula se agregó correctamente")
-    }
+        setAPIData(data)    }
 
     const borrar = async (id) => {
         await borrarPelicula(id)

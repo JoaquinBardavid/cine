@@ -17,11 +17,11 @@ export default function Reservas() {
       <Grid style={{ textAlign: "left", marginTop: 10 }}>
         {APIData ?
           APIData.map((pelicula) => {
-            return (
-              <>
-                <Button href={"/reservas/" + pelicula.id}>{pelicula.titulo}</Button>
-              </>
-            )
+            if (pelicula.salaId != 0) {
+              return (
+                  <Button href={"/reservas/" + pelicula.id}>{pelicula.titulo}</Button>               
+              )
+            }
           }) : 'Espere...'}
       </Grid>
     </>

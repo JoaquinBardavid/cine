@@ -100,28 +100,3 @@ app.post('/reserva', (req, res) => {
     res.send(200);
 
 });
-
-app.put('/reserva/:id', (req, res) => {
-    const { id } = req.params.id;
-    cine.reserva.forEach(r => {
-        if (r.id == id) {
-            r.cantAsientos = cantiAsientos;
-            r.salaId = salaId;
-        }
-    });
-    fs.writeFileSync("./cine.json", JSON.stringify(cine));
-    res.json(cine);
-
-});
-
-app.delete('/reserva/:id', (req, res) => {
-    const { id } = req.params.id;
-    cine.reserva.forEach(r => {
-        if (r.id == id) {
-            cine.reserva.splice(cine.reserva.indexOf(r), 1);
-        }
-    });
-    fs.writeFileSync("./cine.json", JSON.stringify(cine));
-    res.json(cine);
-});
-
