@@ -11,7 +11,6 @@ app.use(express.json({
 }))
 app.use(cors());
 
-
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
@@ -19,7 +18,6 @@ app.listen(port, () => {
 //////////////////////////////////////
 ///////////// Peliculas //////////////
 //////////////////////////////////////
-
 
 app.get('/pelicula', function (req, res) {
     res.json(cine.pelicula);
@@ -38,7 +36,6 @@ app.post('/pelicula', (req, res) => {
     cine.pelicula.push(newMovie);
     fs.writeFileSync("./cine.json", JSON.stringify(cine));
     res.json(cine.pelicula);
-
 });
 
 app.put('/pelicula', (req, res) => {
@@ -109,4 +106,3 @@ app.delete('/reserva/:id', (req, res) => {
     fs.writeFileSync("./cine.json", JSON.stringify(cine));
     res.send(200);
 });
-

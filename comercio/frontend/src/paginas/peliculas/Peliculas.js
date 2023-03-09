@@ -14,7 +14,7 @@ export default function Home() {
     const verificar = () => {
         let aux = contraseña;
         aux = aux.toLowerCase();
-        aux == "contraseña1" ? setIngreso(true) :alert("Contraseña incorrecta");
+        aux == "contraseña" ? setIngreso(true) : alert("Contraseña incorrecta");
     }
 
     const contraAux = (e) => setContraseña(e.target.value);
@@ -29,7 +29,8 @@ export default function Home() {
     const actualizar = async (id, nuevaSala) => {
         await cambiarCartelera(id, nuevaSala)
         const data = await getPeliculas()
-        setAPIData(data)    }
+        setAPIData(data)    
+    }
 
     const borrar = async (id) => {
         await borrarPelicula(id)
@@ -51,10 +52,10 @@ export default function Home() {
                     <Button size="large" href="/peliculas/nueva">Crear Pelicula</Button>
                     {APIData.map(pelicula => {
                         return (
-                            <div style={{ margin: 20, backgroundColor: "#343a40", width: "100%", borderRadius: 10, padding: 10 }} key={pelicula.id}  >
-                                <ModificarPeli id={pelicula.id} titulo={pelicula.titulo} salaId={pelicula.salaId} actualizar={actualizar} img={pelicula.img}/>
-                                <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
-                            </div>
+                                <div style={{ margin: 20, backgroundColor: "#343a40", width: "100%", borderRadius: 10, padding: 10 }} key={pelicula.id}  >
+                                    <ModificarPeli id={pelicula.id} titulo={pelicula.titulo} salaId={pelicula.salaId} actualizar={actualizar} img={pelicula.img} />
+                                    <BorrarPeli id={pelicula.id} borrar={borrar}>Borrar Pelicula</BorrarPeli>
+                                </div>
                         )
                     })}
                 </Grid> :
@@ -64,7 +65,7 @@ export default function Home() {
                     justifyContent="space-around"
                     alignItems="flex-start"
                     >
-                    <TextField item xs={2} size="small" placeholder="Contraseña" onChange={contraAux} style={{marginTop:10}}/>
+                    <TextField item xs={2} size="small" placeholder="Contraseña" type="password" onChange={contraAux} style={{marginTop:10}}/>
                     <Button item xs={1} size="large" onClick={verificar}>Verificar</Button>
                 </Grid>
             }

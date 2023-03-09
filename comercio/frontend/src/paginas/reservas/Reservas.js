@@ -19,7 +19,15 @@ export default function Reservas() {
           APIData.map((pelicula) => {
             if (pelicula.salaId != 0) {
               return (
-                  <Button href={"/reservas/" + pelicula.id}><img width={200} height={300} src={pelicula.img}></img></Button>               
+                <Button
+                  style={{ width: 250, height: 300 }}
+                  href={"/reservas/" + pelicula.id}
+                >
+                  {pelicula.img != "" ?
+                    <img height={300} width={250} src={pelicula.img} /> :
+                    pelicula.titulo
+                  }
+                </Button>
               )
             }
           }) : 'Espere...'}

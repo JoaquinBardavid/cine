@@ -24,7 +24,7 @@ export default function ModificarPeli(props) {
           <MenuItem disabled>
             <em>Salas</em>
           </MenuItem>
-          <MenuItem value={1} >Sala 1</MenuItem>
+          <MenuItem value={1}>Sala 1</MenuItem>
           <MenuItem value={2}>Sala 2</MenuItem>
           <MenuItem value={3}>Sala 3</MenuItem>
         </Select>

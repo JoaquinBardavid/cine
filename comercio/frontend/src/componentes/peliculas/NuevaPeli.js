@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, MenuItem, Select, TextField, Grid, Box } from "@mui/material";
-import { nuevaPelicula } from "../../servicios/PeliculaServicio";
 
 export default function NuevaPeli(props) {
 
@@ -17,6 +16,7 @@ export default function NuevaPeli(props) {
         reader.onload = function () {
             var base64 = reader.result;
             setImagen(base64)
+            console.log(imagen);
         }
     }
 

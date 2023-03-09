@@ -24,7 +24,7 @@ const theme = createTheme({
     MuiList:{
       styleOverrides:{
         root:{
-           color:"ced4da",
+           color:"#ced4da",
            backgroundColor:"gray"
         }
       }
