@@ -7,7 +7,7 @@ export default function Layout() {
     <>
       <AppBar position="static" style={{ display: "flex", justifyContent: "space-around" }}>
         <Toolbar>
-          <Link href="/" color="inherit" underline="none"><Typography variant="h5">Mulita-Cinema</Typography></Link>
+          <Link href="/" color="inherit" underline="none"><Typography variant="h5">Cine</Typography></Link>
           <Link href="/peliculas" color="inherit" underline="none"><Typography>Peliculas</Typography></Link>
           <Link href="/reservas" color="inherit" underline="none"><Typography>Reservas</Typography></Link>
         </Toolbar>

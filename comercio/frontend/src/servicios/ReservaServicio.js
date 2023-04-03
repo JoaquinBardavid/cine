@@ -1,13 +1,13 @@
-const urlBase = 'http://localhost:5000/';
+const urlBase = 'https://localhost:44388/';// 44388 --- 5000
 
 export async function getReservasPorPeliID(id) {
-    const url = urlBase + "reserva/" + id ;
+    const url = urlBase + "Reserva/GetReservaPorIdPelicula/" + id ; // Reserva/ --- reserva/
     const res = await fetch(url)
     return await res.json();
 }
 
 export async function nuevaReserva(cantEntradas, peliId) {
-    const url = urlBase + "reserva";
+    const url = urlBase + "Reserva"; // Reserva --- reserva/
     const settings = {
       method: 'POST',
       headers: {
@@ -17,8 +17,7 @@ export async function nuevaReserva(cantEntradas, peliId) {
     };
     try {
       const res = await fetch(url, settings);
-      const data = await res.json();
-      return data;
+      
     } catch (e) {
       return console.error(e);
     }
@@ -27,7 +26,7 @@ export async function nuevaReserva(cantEntradas, peliId) {
   export async function borrarReserva(id) {
 
     try {
-      const url = urlBase + "reserva/" + id
+      const url = urlBase + "Reserva/" + id // Reserva/ --- reserva/
       const res = await fetch(url, {
         method: 'DELETE',
         headers: {

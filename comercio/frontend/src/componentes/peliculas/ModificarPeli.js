@@ -17,11 +17,11 @@ export default function ModificarPeli(props) {
     >
       <TextField size="small" value={titulo} disabled />
       {salaId == 0 ? <>Elija una Sala por favor
-        <Select
-          displayEmpty
-          onChange={(e) => setNuevaSala(e.target.value)}
+        <Select 
+          value={nuevaSala}
+          displayEmpty onChange={(e) => setNuevaSala(e.target.value)}
         >
-          <MenuItem disabled>
+          <MenuItem value={0} disabled>
             <em>Salas</em>
           </MenuItem>
           <MenuItem value={1}>Sala 1</MenuItem>
@@ -36,7 +36,7 @@ export default function ModificarPeli(props) {
       }}>
         {salaId == 0 ? "Seleccionar Sala " : "Cambiar a 'fuera de cartelera' "}
       </Button>
-      {img ? <img width={200} src={img} /> : <>SIN FOTO ADJUNTA</>}
+      {img && img.length > 50 ? <img width={200} src={img} /> : <>SIN FOTO ADJUNTA</>}
     </Grid>
   )
 }

@@ -42,7 +42,7 @@ export default function Home() {
 
     return (
         <div >
-            {ingreso ?
+            {APIData ?
                 <Grid
                     container
                     direction="column"
@@ -59,15 +59,9 @@ export default function Home() {
                         )
                     })}
                 </Grid> :
-                <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-around"
-                    alignItems="flex-start"
-                    >
-                    <TextField item xs={2} size="small" placeholder="Contraseña" type="password" onChange={contraAux} style={{marginTop:10}}/>
-                    <Button item xs={1} size="large" onClick={verificar}>Verificar</Button>
-                </Grid>
+                <div>
+                    espere...
+                </div>
             }
         </div>
     )

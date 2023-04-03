@@ -38,8 +38,8 @@ export default function NuevaReserva(props) {
   return (
     <div>
       <h3>QUEDAN {asientos} ENTRADAS PARA: {titulo}</h3>
-      <Select style={{marginBottom:15}} displayEmpty onChange={(e) => setCantEntradas(e.target.value)}>
-        <MenuItem disabled>
+      <Select style={{marginBottom:15}} displayEmpty onChange={(e) => setCantEntradas(e.target.value)} value={cantEntradas}>
+        <MenuItem disabled value={0}>
           <em>Elija una cantidad de entradas</em>
         </MenuItem>
         <MenuItem value={1} > 1 ENTRADA </MenuItem>

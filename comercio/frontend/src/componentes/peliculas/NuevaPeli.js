@@ -6,7 +6,7 @@ export default function NuevaPeli(props) {
     const { validar } = props
 
     const [titulo, setTitulo] = useState("")
-    const [salaId, setSala] = useState(0)
+    const [salaId, setSala] = useState('')
     const [imagen, setImagen] = useState("")
 
     const convertirABase64 = (archivo) => {
@@ -16,7 +16,6 @@ export default function NuevaPeli(props) {
         reader.onload = function () {
             var base64 = reader.result;
             setImagen(base64)
-            console.log(imagen);
         }
     }
 
@@ -35,7 +34,10 @@ export default function NuevaPeli(props) {
                 size="small"
             />
             <label>Sala</label>
-            <Select displayEmpty onChange={(e) => setSala(e.target.value)} style={{ marginBottom: 50 }}>
+            <Select 
+                displayEmpty onChange={(e) => setSala(e.target.value)} style={{ marginBottom: 50 }}
+                value={salaId}
+            >
                 <MenuItem disabled>
                     <em>Elija una sala</em>
                 </MenuItem>

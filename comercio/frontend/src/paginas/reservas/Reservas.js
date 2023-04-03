@@ -22,6 +22,7 @@ export default function Reservas() {
                 <Button
                   style={{ width: 250, height: 300 }}
                   href={"/reservas/" + pelicula.id}
+                  key={pelicula.id}
                 >
                   {pelicula.img != "" ?
                     <img height={300} width={250} src={pelicula.img} /> :
